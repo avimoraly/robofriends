@@ -4,13 +4,23 @@ import './index.css';
 import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
+import { configureStore } from '@reduxjs/toolkit'
+import { Provider } from 'react-redux';
+import { searchRobots } from './reducers';
 
 
+const storeObj = configureStore({
+  reducer: {
+    searchRobots
+  }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App/>
+    <Provider store={storeObj}>
+      <App/>
+    </Provider>
   </React.StrictMode>
 );
 
