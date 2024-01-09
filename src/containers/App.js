@@ -14,7 +14,7 @@ import { setSearchField } from '../actions';
 
 const mapStateToProps = state => {
   return {
-    searchfield: state.searchRobots.searchField
+    searchField: state.searchRobots.searchField
   }
 }
 const mapDispatchToPros = (dispatch) => {
@@ -28,32 +28,35 @@ class App extends Component {
     super();
     this.state = {
       robots: [],
-      searchfield: ''
+      // searchfield: ''
     }
   }
 
   componentDidMount() {
-    console.log(this.props.store.getState());
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(res => res.json())
       .then(users => this.setState({robots: users}))
   }
 
-  onSearchChange = (event) => {
-    this.setState({searchfield: event.target.value});
-  }
+  // onSearchChange = (event) => {
+  //   this.setState({searchfield: event.target.value});
+  // }
 
   render() {
-    const {robots, searchfield } = this.state;
+    const { robots } = this.state;
+   
+    const { searchField, onSearchChange } = this.props;
+    console.log("{ searchField, onSearchChange } ",searchField, onSearchChange  );
     const filteredRobots = robots.filter(robot=>{
-      return robot.name.toLowerCase().includes(searchfield.toLowerCase())
+      console.log("filter robot=",robot);
+      return robot.name.toLowerCase().includes(searchField.toLowerCase())
     })
 
 
     return robots.length ? 
       ( <div className='tc'>
           <h1 className='f1'>RoboFriends</h1>
-          <SearchBox onSearchChange={this.onSearchChange}/>
+          <SearchBox onSearchChange={onSearchChange}/>
           <Scroll>
             <ErrorBoundry>
               <CardList robots={filteredRobots} />
