@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
+
 import { configureStore } from '@reduxjs/toolkit'
-
 import { Provider } from 'react-redux';
-import { searchRobots } from './reducers';
+import { searchRobots, requestRobots } from './reducers';
 import { createLogger } from 'redux-logger';
+import { thunk } from 'redux-thunk'
+import './index.css';
+import App from './containers/App';
+import { combineReducers } from 'redux';
 
-const middleware = [createLogger()];
+const rootReducer = combineReducers(
+  {searchRobots, requestRobots}
+)
+
+const middleware = [createLogger(), thunk];
 
 const storeObj = configureStore({
-  reducer: {searchRobots},
+  reducer:  rootReducer,
   middleware: ()=>middleware,
 })
 
