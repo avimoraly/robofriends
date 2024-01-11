@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { setSearchField } from '../actions';
 import CardList from '../components/CardList';
 import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import "./App.css";
 import ErrorBoundry from '../components/ErrorBoundry';
 
-import { setSearchField } from '../actions';
 
 
 
@@ -27,8 +27,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      robots: [],
-      // searchfield: ''
+      robots: []
     }
   }
 
@@ -38,19 +37,12 @@ class App extends Component {
       .then(users => this.setState({robots: users}))
   }
 
-  // onSearchChange = (event) => {
-  //   this.setState({searchfield: event.target.value});
-  // }
-
   render() {
     const { robots } = this.state;
-   
     const { searchField, onSearchChange } = this.props;
-    console.log("{ searchField, onSearchChange } ",searchField, onSearchChange  );
     const filteredRobots = robots.filter(robot=>{
-      console.log("filter robot=",robot);
       return robot.name.toLowerCase().includes(searchField.toLowerCase())
-    })
+    });
 
 
     return robots.length ? 
