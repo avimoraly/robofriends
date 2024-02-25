@@ -7,6 +7,7 @@ import SearchBox from '../components/SearchBox';
 import Scroll from '../components/Scroll';
 import "./App.css";
 import ErrorBoundry from '../components/ErrorBoundry';
+import Header from '../components/Header';
 
 
 
@@ -43,7 +44,7 @@ class App extends Component {
 
     return !isPending ? 
       ( <div className='tc'>
-          <h1 className='f1'>RoboFriends</h1>
+          <Header />
           <SearchBox onSearchChange={onSearchChange}/>
           <Scroll>
             <ErrorBoundry>

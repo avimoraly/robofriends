@@ -16,7 +16,9 @@ const rootReducer = combineReducers(
   {searchRobots, requestRobots}
 )
 
-const middleware = [createLogger(), thunk];
+const middleware = [
+  // createLogger(),
+   thunk];
 
 const storeObj = configureStore({
   reducer:  rootReducer,
